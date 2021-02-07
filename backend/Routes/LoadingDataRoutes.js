@@ -34,6 +34,16 @@ const authorize = () => {
     });
 };
 
+function clone(obj){
+    if(obj == null || typeof(obj) != 'object')
+        return obj;
+
+    var temp = new obj.constructor(); 
+    for(var key in obj)
+        temp[key] = clone(obj[key]);
+
+    return temp;
+}
 
 const loadDataJSON = async (page, id) => {
     await page.goto(id === 'Student' ? process.env.STUDENT_URL : id === 'MET' ? process.env.MET_URL : RESEARCH_JOURNAL_URL, {
@@ -65,7 +75,7 @@ const loadDataJSON = async (page, id) => {
                 if (!cheerio(this).attr('id')) return false; else return cheerio(this).attr('id').startsWith(relatedProjectsID) && cheerio(this).attr('id').endsWith('_bachelorProjectName');
             })
                 .each(function () {
-                    metObject.supervisor = [];
+                    metObject.supervisors = []; metObject.assistantSupervisors = [];
 
                     const thesisSpan = cheerio(this);
                     const thesisDescription = thesisSpan.parent().next().children()[0];
@@ -75,17 +85,15 @@ const loadDataJSON = async (page, id) => {
                     supervisors.each(function () {
                         const supervisor = cheerio(cheerio(this).children()[0]).text();
                         if (supervisor.startsWith('Prof.') || supervisor.startsWith('Dr.') || supervisor.startsWith('Assoc.'))
-                            metObject.supervisor.push(supervisor);
+                            metObject.supervisors.push(supervisor);
                         else
-                            metObject.assistantSupervisor = supervisor;
+                            metObject.assistantSupervisors.push(supervisor);
                     })
 
                     metObject.thesisName = thesisSpan.text();
-                    console.log(metObject);
-                    // thesisList.push(metObject);
+                    thesisList.push(clone(metObject));
                 })
         });
-        console.log(thesisList);
     }
     else {
 
