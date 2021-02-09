@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import ThesisTable from './components/ThesisTable.js';
+import CategoriesPage from './components/CategoriesPage.js';
+import SupervisorsPage from './components/SupervisorsPage.js';
+import Navbar from './components/navbar.js';
+
+import { BrowserRouter, Route } from 'react-router-dom';
+import Image from './assets/5293.jpg';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+      <img src={Image} width="1000" height="400"></img>
+      <div>
+      <a href="http://www.freepik.com">Designed by pch.vector / Freepik</a>
+      </div>
+      <Route exact path='/' component={ThesisTable}></Route>
+      <Route path='/categoriespage' component={CategoriesPage}></Route>
+      <Route path='/supervisorspage' component={SupervisorsPage}></Route>
+    </BrowserRouter>
   );
 }
 
