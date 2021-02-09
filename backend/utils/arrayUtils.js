@@ -9,7 +9,7 @@ const binarySearch = (arr, x) => {
         let mid = Math.floor((start + end) / 2);
 
         // If element is present at mid, return True 
-        if (arr[mid].thesisName.startsWith(x)) {
+        if (arr[mid].thesisName.toLowerCase().startsWith(x.toLowerCase())) {
             return mid;
         }
 

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs');
-const path = require("path");
+const { read, write } = require('../utils/fileUtils.js');
 
 //-----------------------------------------------------------------------
 // Entire Routes
@@ -51,12 +50,6 @@ router.get('/entireSortCategoryDescending', async (req, res) => {
 router.get('/entireSortSupervisorAscending', async (req, res) => {
     const studentThesisList = read('../entireThesisList.json');
     studentThesisList.sort(function (a, b) {
-        if (!b.foundInMET) {
-            return -1;
-        }
-        if (!a.foundInMET) {
-            return 1;
-        }
         if (b.supervisorInStudent > a.supervisorInStudent) {
             return -1;
         }
@@ -74,12 +67,6 @@ router.get('/entireSortSupervisorAscending', async (req, res) => {
 router.get('/entireSortSupervisorDescending', async (req, res) => {
     const studentThesisList = read('../entireThesisList.json');
     studentThesisList.sort(function (a, b) {
-        if (!b.foundInMET) {
-            return -1;
-        }
-        if (!a.foundInMET) {
-            return 1;
-        }
         if (a.supervisorInStudent > b.supervisorInStudent) {
             return -1;
         }
@@ -96,12 +83,6 @@ router.get('/entireSortSupervisorDescending', async (req, res) => {
 router.get('/entireSortThesisNameAscending', async (req, res) => {
     const studentThesisList = read('../entireThesisList.json');
     studentThesisList.sort(function (a, b) {
-        if (!b.foundInMET) {
-            return -1;
-        }
-        if (!a.foundInMET) {
-            return 1;
-        }
         if (b.thesisName > a.thesisName) {
             return -1;
         }
@@ -118,12 +99,6 @@ router.get('/entireSortThesisNameAscending', async (req, res) => {
 router.get('/entireSortThesisNameDescending', async (req, res) => {
     const studentThesisList = read('../entireThesisList.json');
     studentThesisList.sort(function (a, b) {
-        if (!b.foundInMET) {
-            return -1;
-        }
-        if (!a.foundInMET) {
-            return 1;
-        }
         if (a.thesisName > b.thesisName) {
             return -1;
         }
@@ -140,12 +115,6 @@ router.get('/entireSortThesisNameDescending', async (req, res) => {
 router.get('/entireSortIDDescending', async (req, res) => {
     const studentThesisList = read('../entireThesisList.json');
     studentThesisList.sort(function (a, b) {
-        if (!b.foundInMET) {
-            return -1;
-        }
-        if (!a.foundInMET) {
-            return 1;
-        }
         if (a.id > b.id) {
             return -1;
         }
@@ -164,12 +133,6 @@ router.get('/entireSortIDDescending', async (req, res) => {
 router.get('/unfoundSortSupervisorAscending', async (req, res) => {
     const studentThesisList = read('../unfoundThesisList.json');
     studentThesisList.sort(function (a, b) {
-        if (!b.foundInMET) {
-            return -1;
-        }
-        if (!a.foundInMET) {
-            return 1;
-        }
         if (b.supervisorInStudent > a.supervisorInStudent) {
             return -1;
         }
@@ -187,12 +150,6 @@ router.get('/unfoundSortSupervisorAscending', async (req, res) => {
 router.get('/unfoundSortSupervisorDescending', async (req, res) => {
     const studentThesisList = read('../unfoundThesisList.json');
     studentThesisList.sort(function (a, b) {
-        if (!b.foundInMET) {
-            return -1;
-        }
-        if (!a.foundInMET) {
-            return 1;
-        }
         if (a.supervisorInStudent > b.supervisorInStudent) {
             return -1;
         }
@@ -209,12 +166,6 @@ router.get('/unfoundSortSupervisorDescending', async (req, res) => {
 router.get('/unfoundSortThesisNameAscending', async (req, res) => {
     const studentThesisList = read('../unfoundThesisList.json');
     studentThesisList.sort(function (a, b) {
-        if (!b.foundInMET) {
-            return -1;
-        }
-        if (!a.foundInMET) {
-            return 1;
-        }
         if (b.thesisName > a.thesisName) {
             return -1;
         }
@@ -231,12 +182,6 @@ router.get('/unfoundSortThesisNameAscending', async (req, res) => {
 router.get('/unfoundSortThesisNameDescending', async (req, res) => {
     const studentThesisList = read('../unfoundThesisList.json');
     studentThesisList.sort(function (a, b) {
-        if (!b.foundInMET) {
-            return -1;
-        }
-        if (!a.foundInMET) {
-            return 1;
-        }
         if (a.thesisName > b.thesisName) {
             return -1;
         }
@@ -253,12 +198,6 @@ router.get('/unfoundSortThesisNameDescending', async (req, res) => {
 router.get('/unfoundSortIDDescending', async (req, res) => {
     const studentThesisList = read('../unfoundThesisList.json');
     studentThesisList.sort(function (a, b) {
-        if (!b.foundInMET) {
-            return -1;
-        }
-        if (!a.foundInMET) {
-            return 1;
-        }
         if (a.id > b.id) {
             return -1;
         }

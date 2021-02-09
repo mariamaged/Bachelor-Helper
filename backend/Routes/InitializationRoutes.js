@@ -71,7 +71,7 @@ router.get('/allCategories', async (req, res) => {
     });
 
     const finalList = [];
-    var categoryObject = { category: studentThesisList[0].category };
+    var categoryObject = { category: studentThesisList[0].category, categoryDescription: studentThesisList[0].categoryDescription };
     var categoryList = [];
     for (var i = 0; i < studentThesisList.length; i++) {
         if (studentThesisList[i].category === categoryObject.category) {
@@ -80,8 +80,8 @@ router.get('/allCategories', async (req, res) => {
         else {
             categoryObject.thesisList = categoryList;
             finalList.push(categoryObject);
-            if (!studentThesisList[i].category) break;
-            categoryObject = { category: studentThesisList[i].category };
+            if (!studentThesisList[i].foundInMET) break;
+            categoryObject = { category: studentThesisList[i].category,  categoryDescription: studentThesisList[i].categoryDescription };
             categoryList = [];
             categoryList.push(studentThesisList[i]);
         }
