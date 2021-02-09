@@ -1,11 +1,10 @@
 const http = require('httpntlm');
-
-var authorization = {
-    username: '',
-    password: ''
+const authorization = {
+    username: process.env.USER_NAME,
+    password: process.env.PASSWORD
 }
-
 const authorize = () => {
+    console.log(authorization);
     return new Promise((resolve, reject) => {
         http.get(
             {
@@ -17,7 +16,7 @@ const authorize = () => {
                 console.log(
                     res.statusCode === 200
                         ? 'You are authorized\n'
-                        : 'You are not authroized\n'
+                        : 'You are not authorized\n'
                 );
                 resolve(res.statusCode === 200);
             }

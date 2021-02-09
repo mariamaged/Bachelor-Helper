@@ -1,13 +1,12 @@
 // For environmental variables.
 require('dotenv').config();
-
 const cheerio = require('cheerio'),
     puppet = require('puppeteer'),
     fs = require('fs');
 
 const { objectFromStudentItem } = require('../utils/stringUtils.js');
 const { clone } = require('../utils/objectUtils.js');
-const { read, write} = require('../utils/arrayUtils.js');
+const { read, write} = require('../utils/fileUtils.js');
 const { authorize, authorization } = require('../utils/authorizeUtils.js');
 
 const loadDataJSON = async (page, id) => {
@@ -133,7 +132,6 @@ const main = async () => {
 
     // Authenticate GETs
     await page.authenticate(authorization);
-    page.on('console', (msg) => console[msg._type]('PAGE LOG:', msg._text));
 
     // Load data.
     await loadDataJSON(page, 'Student');
@@ -141,4 +139,4 @@ const main = async () => {
 
 }
 
-main();
+module.exports = main;

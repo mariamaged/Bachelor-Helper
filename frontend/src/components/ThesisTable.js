@@ -193,7 +193,7 @@ class ThesisTable extends Component {
                     }); break;
 
             case 'thesisd1':
-                axios.get('http://localhost:5000/api/unfoundSortThesisNameAscending')
+                axios.get('http://localhost:5000/api/unfoundSortThesisNameDescending')
                     .then(response => {
                         this.setState({ entireThesisList: response.data });
                         console.log('State: ', this.state);
@@ -202,6 +202,26 @@ class ThesisTable extends Component {
                     .catch(error => {
                         console.log('Error: ', error);
                     }); break;
+            case 'ida1':
+                axios.get('http://localhost:5000/api/unfoundThesisList')
+                    .then(response => {
+                        this.setState({ entireThesisList: response.data });
+                        console.log('State: ', this.state);
+                        console.log('Response for getting unfound thesis list: ', response.data);
+                    })
+                    .catch(error => {
+                        console.log('Error: ', error);
+                    }); break;
+            case 'idd1':
+                axios.get('http://localhost:5000/api/unfoundSortIDDescending')
+                    .then(response => {
+                        this.setState({ entireThesisList: response.data });
+                        console.log('State: ', this.state);
+                        console.log('Response for getting unfound thesis list: ', response.data);
+                    })
+                    .catch(error => {
+                        console.log('Error: ', error);
+                    });
         }
     }
     render() {
@@ -211,7 +231,7 @@ class ThesisTable extends Component {
             <div className="container" >
                 <br />
                 <br />
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs" data-tabs="tabs">
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#entire">All Thesis List</a>
                     </li>

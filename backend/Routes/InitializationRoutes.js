@@ -2,9 +2,11 @@
 const express = require('express');
 const router = express.Router();
 const { binarySearch } = require('../utils/arrayUtils.js');
-const { read, write } = require('../utils/fileUtils.js');
+const { read, write, checkExistsWithTimeout } = require('../utils/fileUtils.js');
 
 router.get('/entireThesisList', async (req, res) => {
+    await checkExistsWithTimeout('../Student.json', 5000);
+    await checkExistsWithTimeout('../MET.json', 5000);
     const studentThesisList = read('../Student.json');
     const metThesisList = read('../MET.json');
     const finalList = [], unfoundList = [];
@@ -48,11 +50,13 @@ router.get('/entireThesisList', async (req, res) => {
 })
 
 router.get('/unfoundThesisList', async (req, res) => {
+    await checkExistsWithTimeout('../unfoundThesisList.json', 5000);
     const unfoundList = read('../unfoundThesisList.json');
     return res.status(200).json(unfoundList);
 });
 
 router.get('/allCategories', async (req, res) => {
+    await checkExistsWithTimeout('../entireThesisList.json', 5000);
     const studentThesisList = read('../entireThesisList.json');
     studentThesisList.sort(function (a, b) {
         if (!b.foundInMET) {
@@ -93,6 +97,7 @@ router.get('/allCategories', async (req, res) => {
 });
 
 router.get('/allSupervisors', async (req, res) => {
+    await checkExistsWithTimeout('../entireThesisList.json', 5000);
     const studentThesisList = read('../entireThesisList.json');
     studentThesisList.sort(function (a, b) {
         if (b.supervisorInStudent > a.supervisorInStudent) {

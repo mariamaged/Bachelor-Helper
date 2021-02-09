@@ -6,11 +6,36 @@ const read = (filename) => {
 }
 
 const write = (filename, json) => {
-    fs.writeFile(filename, JSON.stringify(json, null, 4), err => {
-        if (err) throw err;
+    fs.writeFileSync(filename, JSON.stringify(json, null, 4));
+}
+
+const checkExistsWithTimeout = (filePath, timeout) => {
+    return new Promise(function (resolve, reject) {
+        var timer = setTimeout(function () {
+            watcher.close();
+            reject(new Error('File did not exists and was not created during the timeout.'));
+        }, timeout);
+
+        fs.access(path.resolve(__dirname, filePath), fs.constants.R_OK, function (err) {
+            if (!err) {
+                clearTimeout(timer);
+                watcher.close();
+                resolve();
+            }
+        });
+
+        var dir = path.dirname(path.resolve(__dirname, filePath));
+        var basename = path.basename(path.resolve(__dirname, filePath));
+        var watcher = fs.watch(dir, function (eventType, filename) {
+            if (eventType === 'rename' && filename === basename) {
+                clearTimeout(timer);
+                watcher.close();
+                resolve();
+            }
+        });
     });
 }
 
 module.exports = {
-    read, write
+    read, write, checkExistsWithTimeout
 };

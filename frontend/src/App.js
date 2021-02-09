@@ -1,5 +1,6 @@
 import ThesisTable from './components/ThesisTable.js';
 import CategoriesPage from './components/CategoriesPage.js';
+import SupervisorsPage from './components/SupervisorsPage.js';
 import Navbar from './components/navbar.js';
 
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -13,8 +14,9 @@ function App() {
       <div>
       <a href="http://www.freepik.com">Designed by pch.vector / Freepik</a>
       </div>
-      <Route path='/tables' component={ThesisTable}></Route>
+      <Route exact path='/' component={ThesisTable}></Route>
       <Route path='/categoriespage' component={CategoriesPage}></Route>
+      <Route path='/supervisorspage' component={SupervisorsPage}></Route>
     </BrowserRouter>
   );
 }
