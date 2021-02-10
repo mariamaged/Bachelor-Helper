@@ -25,8 +25,9 @@ class table extends Component {
         const print = (string) => {
             var result = "";
             for (var i = 0; i < string.length; i++) {
-                if (i == string.length - 1) break;
-                else result += `${string[i]}, `;
+                result += `${string[i]}`;
+                if (i < string.length - 1) result+= ', ';
+                else break;
             }
             return result;
         };
