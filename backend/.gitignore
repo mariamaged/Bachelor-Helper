@@ -1,2 +1,7 @@
 /node_modules
-*.json
+Student.json
+MET.json
+entireThesisList.json
+unfoundThesisList.json
+allCategories.json
+allSupervisors.json
