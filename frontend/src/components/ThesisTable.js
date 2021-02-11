@@ -1,5 +1,6 @@
 // Our Components
 import Table from './table.js';
+
 // React Components
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -7,7 +8,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 // React
 import React, { Component } from 'react';
 
-// Reacter Router and axios
+// React Router and axios
 import axios from 'axios';
 
 // CSS and images
@@ -47,7 +48,7 @@ class ThesisTable extends Component {
                     .then(response => {
                         this.setState({ entireThesisList: response.data });
                         console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
+                        console.log('Response for sorting entire thesis list by category ascending: ', response.data);
                     })
                     .catch(error => {
                         console.log('Error: ', error);
@@ -57,7 +58,7 @@ class ThesisTable extends Component {
                     .then(response => {
                         this.setState({ entireThesisList: response.data });
                         console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
+                        console.log('Response for sorting entire thesis list by category descending: ', response.data);
                     })
                     .catch(error => {
                         console.log('Error: ', error);
@@ -67,7 +68,7 @@ class ThesisTable extends Component {
                     .then(response => {
                         this.setState({ entireThesisList: response.data });
                         console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
+                        console.log('Response for sorting entire thesis list by supervisor ascending: ', response.data);
                     })
                     .catch(error => {
                         console.log('Error: ', error);
@@ -78,7 +79,7 @@ class ThesisTable extends Component {
                     .then(response => {
                         this.setState({ entireThesisList: response.data });
                         console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
+                        console.log('Response for sorting entire thesis list by supervisor descending: ', response.data);
                     })
                     .catch(error => {
                         console.log('Error: ', error);
@@ -89,7 +90,7 @@ class ThesisTable extends Component {
                     .then(response => {
                         this.setState({ entireThesisList: response.data });
                         console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
+                        console.log('Response for sorting entire thesis list by thesis name ascending: ', response.data);
                     })
                     .catch(error => {
                         console.log('Error: ', error);
@@ -100,7 +101,7 @@ class ThesisTable extends Component {
                     .then(response => {
                         this.setState({ entireThesisList: response.data });
                         console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
+                        console.log('Response for sorting entire thesis list by thesis name descending: ', response.data);
                     })
                     .catch(error => {
                         console.log('Error: ', error);
@@ -111,29 +112,7 @@ class ThesisTable extends Component {
                     .then(response => {
                         this.setState({ entireThesisList: response.data });
                         console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
-                    })
-                    .catch(error => {
-                        console.log('Error: ', error);
-                    }); break;
-
-            case 'thesisd':
-                axios.get('http://localhost:5000/api/entireSortThesisNameDescending')
-                    .then(response => {
-                        this.setState({ entireThesisList: response.data });
-                        console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
-                    })
-                    .catch(error => {
-                        console.log('Error: ', error);
-                    }); break;
-
-            case 'idd':
-                axios.get('http://localhost:5000/api/entireSortIDDescending')
-                    .then(response => {
-                        this.setState({ entireThesisList: response.data });
-                        console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
+                        console.log('Response for sorting entire thesis list by id descending: ', response.data);
                     })
                     .catch(error => {
                         console.log('Error: ', error);
@@ -144,7 +123,7 @@ class ThesisTable extends Component {
                     .then(response => {
                         this.setState({ entireThesisList: response.data });
                         console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
+                        console.log('Response for sorting entire thesis list by id ascending: ', response.data);
                     })
                     .catch(error => {
                         console.log('Error: ', error);
@@ -153,9 +132,9 @@ class ThesisTable extends Component {
             case 'supervisora1':
                 axios.get('http://localhost:5000/api/unfoundSortSupervisorAscending')
                     .then(response => {
-                        this.setState({ entireThesisList: response.data });
+                        this.setState({ unfoundThesisList: response.data });
                         console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
+                        console.log('Response for sorting unfound thesis list by supervisor ascending: ', response.data);
                     })
                     .catch(error => {
                         console.log('Error: ', error);
@@ -163,9 +142,9 @@ class ThesisTable extends Component {
             case 'supervisord1':
                 axios.get('http://localhost:5000/api/unfoundSortSupervisorDescending')
                     .then(response => {
-                        this.setState({ entireThesisList: response.data });
+                        this.setState({ unfoundThesisList: response.data });
                         console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
+                        console.log('Response for sorting unfound thesis list by supervisor descending: ', response.data);
                     })
                     .catch(error => {
                         console.log('Error: ', error);
@@ -174,9 +153,9 @@ class ThesisTable extends Component {
             case 'thesisa1':
                 axios.get('http://localhost:5000/api/unfoundSortThesisNameAscending')
                     .then(response => {
-                        this.setState({ entireThesisList: response.data });
+                        this.setState({ unfoundThesisList: response.data });
                         console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
+                        console.log('Response for sorting unfound thesis list by thesis ascending: ', response.data);
                     })
                     .catch(error => {
                         console.log('Error: ', error);
@@ -185,9 +164,9 @@ class ThesisTable extends Component {
             case 'thesisd1':
                 axios.get('http://localhost:5000/api/unfoundSortThesisNameDescending')
                     .then(response => {
-                        this.setState({ entireThesisList: response.data });
+                        this.setState({ unfoundThesisList: response.data });
                         console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
+                        console.log('Response for sorting unfound thesis list by thesis descending: ', response.data);
                     })
                     .catch(error => {
                         console.log('Error: ', error);
@@ -195,9 +174,9 @@ class ThesisTable extends Component {
             case 'ida1':
                 axios.get('http://localhost:5000/api/readUnfoundThesisList')
                     .then(response => {
-                        this.setState({ entireThesisList: response.data });
+                        this.setState({ unfoundThesisList: response.data });
                         console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
+                        console.log('Response for sorting unfound thesis list by id ascending: ', response.data);
                     })
                     .catch(error => {
                         console.log('Error: ', error);
@@ -205,9 +184,9 @@ class ThesisTable extends Component {
             case 'idd1':
                 axios.get('http://localhost:5000/api/unfoundSortIDDescending')
                     .then(response => {
-                        this.setState({ entireThesisList: response.data });
+                        this.setState({ unfoundThesisList: response.data });
                         console.log('State: ', this.state);
-                        console.log('Response for getting unfound thesis list: ', response.data);
+                        console.log('Response for sorting unfound thesis list by id descending: ', response.data);
                     })
                     .catch(error => {
                         console.log('Error: ', error);

@@ -16,6 +16,7 @@ class table extends Component {
             currentExpandedRows.concat(rowID);
 
         this.setState({ expandedRows: newExpandedRows });
+        console.log(this.state);
     }
 
     render() {
@@ -58,15 +59,32 @@ class table extends Component {
             return (<React.Fragment key={index}>{arrayOfTD}</React.Fragment>);
         });
 
+        const thesisDescriptionStyle = {border: "1.5px solid #54bca4", borderRadius: "8px", padding: "5px"};
         const tableItems = updatedThesisList.length ? (updatedThesisList.map((thesis, index) => {
             return (
                 <React.Fragment key={index}>
                     {thesisList[index].foundInMET ?
-                        (<tr onClick={() => { this.handleOnClick(index) }} key={index}>
-                            {thesis}
-                        </tr>
-                        )
-                        : (<tr class="table-dark" onClick={() => { this.handleOnClick(index) }} key={index}>{thesis}</tr>)
+                        <>
+                            <tr onClick={() => { this.handleOnClick(index) }} style={{cursor: "grabbing"}}>
+                                {thesis}
+                            </tr>
+                            {this.state.expandedRows.includes(index) &&
+                                <tr style={{backgroundColor: "#f2f2f2"}}>
+                                    <td colspan="6">
+                                        <div>
+                                            <span style={thesisDescriptionStyle}>
+                                                <strong>Thesis Description:</strong></span>
+                                            <div style={{float: "left"}}/>
+                                        </div>
+                                        <br/>
+                                        <div>
+                                            {thesisList[index].thesisDescription}
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </>
+                        : (<tr class="table-dark">{thesis}</tr>)
                     }
 
                 </React.Fragment >)

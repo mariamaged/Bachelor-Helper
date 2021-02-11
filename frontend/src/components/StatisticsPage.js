@@ -1,10 +1,17 @@
+// React
 import React, { Component } from 'react';
+// React Components
 import { Card, Icon, Image, Container } from 'semantic-ui-react';
 import Jumbotron from 'react-bootstrap/Jumbotron';
-import object from '../assets/imagedata1.js';
-// Reacter Router and axios
+import ContainerBootstrap from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
+// React Router and axios
 import axios from 'axios';
 // CSS and images
+import object from '../assets/imagedata1.js';
+
 class StatisticsPage extends Component {
     state = {
         numberPerCategory: [],
@@ -76,7 +83,7 @@ class StatisticsPage extends Component {
         const categoryItems = this.state.numberPerCategory.length ? (this.state.numberPerCategory.map((category, index) => {
             return (
                 <Card key={index}>
-                    <Image src={object[category.category]} wrapped ui={false} className="fluid" />
+                    <Image src={object[category.category]} wrapped ui={false} />
                     <Card.Content>
                         <Card.Header >{category.category}</Card.Header>
                     </Card.Content>
@@ -90,29 +97,71 @@ class StatisticsPage extends Component {
             );
         })) : (<div />);
 
+        const progressStyle = { width: "300px", marginLeft: "25px" };
         const supervisorItems = this.state.numberPerSupervisor.length ? (this.state.numberPerSupervisor.map((supervisor, index) => {
             return (
-                <React.Fragment key={index}>
-                    <div class="progress" style={{ width: "300px", marginLeft: "50px" }}>
-                        <div style={{ float: "left" }}  class="progress-bar progress-bar-striped bg-success" role="progressbar" style={{ width: supervisor.num / this.state.totalSupervisorNum * 100 }} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <div style={{ float: "left" }}> {supervisor.supervisor}</div>
+                <ContainerBootstrap key={index}>
+                    <Row>
+                        <Col>
+                            <strong> {supervisor.supervisor}</strong>
+                        </Col>
+
+                        <Col xs={9}>
+                            <Row>
+                                <Col>
+                                    <div class="progress" style={progressStyle}>
+                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style={{ width: supervisor.num / this.state.totalSupervisorNum * 100 }} aria-valuenow={{ width: supervisor.num / this.state.totalSupervisorNum * 100 }} aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </Col>
+                                <Col>
+                                    {supervisor.num}
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
                     <br />
-                    <br />
-                </React.Fragment>)
+                </ContainerBootstrap>)
         })) : (<div />);
+
         return (
             <div>
-                <h3 style={{margin: "20px"}}>
+            <br/>
+                <Jumbotron>
+                <ContainerBootstrap className="container">
+                    <Row>
+                        <Col>
+                            <Col>
+                                <h2><strong>Total Thesis Number</strong></h2>
+                            </Col>
+                            <Col>
+                                <h3 style={{color: "#54bca4"}}>{this.state.totalThesisNum}</h3>
+                            </Col>
+                        </Col>
+
+                        <Col>
+                            <Col>
+                                <h2><strong>Unfound Thesis Number</strong></h2>
+                            </Col>
+                            <Col>
+                                <h3 style={{color: "#54bca4"}}>{this.state.unfoundThesisNum}</h3>
+                            </Col>
+                        </Col>
+                    </Row>
+                </ContainerBootstrap>
+                </Jumbotron>
+                <h3 style={{ margin: "20px" }}>
                     Number of Categories is &nbsp;
                 <small class="text-muted">{this.state.totalCategoryNum}</small>
                 </h3>
-                <Container style={{ padding: "20px" }}>
+                <Container style={{
+                    padding: "20px", borderStyle: "solid", borderBottom: "2px", borderLeft: "2px",
+                    borderRight: "2px", borderColor: "blue"
+                }}>
                     <Card.Group itemsPerRow={3}>
                         {categoryItems}
                     </Card.Group>
                 </Container>
-                <h3 style={{margin: "20px"}}>
+                <h3 style={{ margin: "20px" }}>
                     Number of Supervisors is &nbsp;
                 <small class="text-muted">{this.state.totalSupervisorNum}</small>
                 </h3>

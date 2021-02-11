@@ -27,19 +27,20 @@ cd backend
 npm install
 ```
 6. **Step 6:** Start the server, which scrapes the data and stores it on your machine as .json files.
+   - `Note:` The console will print **Done!** when all data is fetched.
 ```bash
 npm start
 ```
-7. **Step 7:** Open a new terminal (without closing the first one).
-8. **Step 8:** Navigate into the frontend directory.
+8. **Step 7:** Open a new terminal (without closing the first one).
+9. **Step 8:** Navigate into the frontend directory.
 ```bash
 cd frontend
 ```
-9. **Step 9:** Install the necessary dependencies found inside the package.json file.
+10. **Step 9:** Install the necessary dependencies found inside the package.json file.
 ```bash
 npm install
 ``` 
-10. **Step 10:** Start the react app where the page will automatically open on your browser on port 3000. If it doesn't, type `localhost:3000` on the url bar.
+11. **Step 10:** Start the react app where the page will automatically open on your browser on port 3000. If it doesn't, type `localhost:3000` on the url bar.
 ```
 npm start
 ```
@@ -54,8 +55,9 @@ npm start
 ![enter image description here](https://lh3.googleusercontent.com/pw/ACtC-3fj55SJvQEwwDQyXHc1YPGYBFCYy7hL_sgO8fyioq2zbFa-s9eGILgPsH1Hy3805sGYAdnS9c2YdEWQ2nnqz5Ej8HvSMHmCGa_LqeBa8VjzltYvwm8bN3IopsMWf1466R9CDVFjBfTLNkLKcDihglxi=w1006-h487-no?authuser=0)
 
 ***
-	2. View thesis description by clicking on each table row.
-- (To be added).
+	2. View thesis description by clicking on each expandable/collapsable table row.
+
+![enter image description here](https://lh3.googleusercontent.com/pw/ACtC-3d_zerKJcKypkhVlWIWudua1JxUY9nZXFn5WBNdWcIKcm6Jknxgj0q0OJ87srGpF5JvGsUM3mXdWojshmSDbemN8ZJZgKFJgkmHLsZxTS4O3n1xXJvntG-qq-SfeJIH_C8ZMLnvNYLRKsaM1zYhA4fz=w1006-h525-no?authuser=0)
 ***
 	3. View a separate list for all thesis that are not currently found in MET.
 
@@ -87,6 +89,9 @@ npm start
 2. Number of thesis per supervisor.
 3. Total number of thesis.
 4. Number of thesis not found in MET.
-- (to be added).
 
-![enter image description here](https://lh3.googleusercontent.com/pw/ACtC-3cG9_ububIYw_9IbOO1YDBE3IErzhu4r7mL13o38THqYj9MpvfmVWbifbrTrCCJAJQrue5YHeaF15AAdv_EDuqZrTNRHq3M1wRG_U3ObrGNP9GSvyEtjGxYqTjHBTltgUyU_ZRgsZm8P3tj5GACAMjY=w1006-h418-no?authuser=0)
+![enter image description here](https://lh3.googleusercontent.com/pw/ACtC-3dCnQZfvFZun7Tvcik7C7sXb-AsPNhrTbeWsyUh0Q3k7h4M9tlDbeR4YZSX-H8RAtWNd3QOcMfTII-2QnqWcNghv5hm-afOSv8vswPE9X9lX_mwFx0sxRy_JAx2rEe2zqkXx5Zy32yyVYz9TgDfLQRN=w1006-h203-no?authuser=0)
+
+![enter image description here](https://lh3.googleusercontent.com/pw/ACtC-3dkJPIizt0Bsj4REeqTSTrfC0QhoZeJlhX4eWFV7WrYfIHm94_62VvHUn1bPKEHms9lSh2FDFWS41ZqR7CuvmGQygzDkHAOac-ZIkYKwxpaQuLG8AzdxFwL_pnyjrv4IZ0tr06DyPfve8YMEcnuk0WB=w1006-h418-no?authuser=0)
+
+![enter image description here](https://lh3.googleusercontent.com/pw/ACtC-3eM-WqR65j690Yo7VCDqQDMXB27s800K05fUHf8bE1bfm1tVQCIwl3-lSeJUOEhS0NzwyZRpxbDYB6b-bSOA1WzC-uefWmXg0Z_INCqiOxeqzigpQDkVIj2zvqiCdZz6KEKP6YlEp51L6JAktIbSdSO=w1002-h564-no?authuser=0)
