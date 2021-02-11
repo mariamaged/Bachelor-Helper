@@ -3,13 +3,14 @@ const express = require('express');
 const router = express.Router();
 const { binarySearch } = require('../utils/arrayUtils.js');
 const { read, write, checkExistsWithTimeout } = require('../utils/fileUtils.js');
+const axios = require('axios');
 
-router.get('/entireThesisList', async (req, res) => {
+router.get('/writeEntireThesisList', async (req, res) => {
     await checkExistsWithTimeout('../Student.json', 5000);
     await checkExistsWithTimeout('../MET.json', 5000);
     const studentThesisList = read('../Student.json');
     const metThesisList = read('../MET.json');
-    const finalList = [], unfoundList = [];
+    const finalList = [];
     var counter = 0;
 
     metThesisList.sort(function (a, b) {
@@ -28,7 +29,6 @@ router.get('/entireThesisList', async (req, res) => {
 
         if (result === -1) {
             studentThesis.foundInMET = false;
-            unfoundList.push(studentThesis);
         }
         else {
             studentThesis.foundInMET = true;
@@ -43,91 +43,54 @@ router.get('/entireThesisList', async (req, res) => {
     }
 
     write('./entireThesisList.json', finalList);
-    write('./unfoundThesisList.json', unfoundList);
-
-    return res.status(200).json(finalList);
+    return res.status(200).send('Operation Successful!');
 
 })
 
-router.get('/unfoundThesisList', async (req, res) => {
-    await checkExistsWithTimeout('../unfoundThesisList.json', 5000);
-    const unfoundList = read('../unfoundThesisList.json');
-    return res.status(200).json(unfoundList);
-});
-
-router.get('/allCategories', async (req, res) => {
-    await checkExistsWithTimeout('../entireThesisList.json', 5000);
-    const studentThesisList = read('../entireThesisList.json');
-    studentThesisList.sort(function (a, b) {
-        if (!b.foundInMET) {
-            return -1;
-        }
-        if (!a.foundInMET) {
-            return 1;
-        }
-        if (b.category > a.category) {
-            return -1;
-        }
-        if (a.category > b.category) {
-            return 1;
-        }
-        return 0;
-    });
-
-    const finalList = [];
-    var categoryObject = { category: studentThesisList[0].category, categoryDescription: studentThesisList[0].categoryDescription };
-    var categoryList = [];
-    for (var i = 0; i < studentThesisList.length; i++) {
-        if (studentThesisList[i].category === categoryObject.category) {
-            categoryList.push(studentThesisList[i]);
-        }
-        else {
-            categoryObject.thesisList = categoryList;
-            finalList.push(categoryObject);
-            if (!studentThesisList[i].foundInMET) break;
-            categoryObject = { category: studentThesisList[i].category,  categoryDescription: studentThesisList[i].categoryDescription };
-            categoryList = [];
-            categoryList.push(studentThesisList[i]);
-        }
+router.get('/writeUnfoundThesisList', async (req, res) => {
+    checkExistsWithTimeout('../entireThesisList.json', 500)
+    .then(() => {
+        const entireList = read('../entireThesisList.json');
+        const unfoundList = entireList.filter((thesis) => {return !thesis.foundInMET});
+        write('./unfoundThesisList.json', unfoundList);
+        return res.status(200).send('Operation Successful!');
     }
-
-    console.log(finalList.length);
-    write('./allCategories.json', finalList);
-    return res.status(200).json(finalList);
-});
-
-router.get('/allSupervisors', async (req, res) => {
-    await checkExistsWithTimeout('../entireThesisList.json', 5000);
-    const studentThesisList = read('../entireThesisList.json');
-    studentThesisList.sort(function (a, b) {
-        if (b.supervisorInStudent > a.supervisorInStudent) {
-            return -1;
-        }
-        if (a.supervisorInStudent > b.supervisorInStudent) {
-            return 1;
-        }
-        return 0;
+    )
+    .catch(async (error) => {
+        await axios.get('http://localhost:5000/api/writeEntireThesisList');
+        const entireList = read('../entireThesisList.json');
+        const unfoundList = entireList.filter((thesis) => {return !thesis.foundInMET});
+        write('./unfoundThesisList.json', unfoundList);
+        return res.status(200).send('Operation Successful!');
     });
-
-    const finalList = [];
-    var supervisorObject = { supervisor: studentThesisList[0].supervisorInStudent };
-    var supervisorList = [];
-    for (var i = 0; i < studentThesisList.length; i++) {
-        if (studentThesisList[i].supervisorInStudent === supervisorObject.supervisor) {
-            supervisorList.push(studentThesisList[i]);
-        }
-        else {
-            supervisorObject.thesisList = supervisorList;
-            finalList.push(supervisorObject);
-            supervisorObject = { supervisor: studentThesisList[i].supervisorInStudent };
-            supervisorList = [];
-            supervisorList.push(studentThesisList[i]);
-        }
-    }
-
-    write('./allSupervisors.json', finalList);
-    return res.status(200).json(finalList);
 });
 
+router.get('/readEntireThesisList', async (req, res) => {
+    checkExistsWithTimeout('../entireThesisList.json', 500)
+        .then(() => {
+            const entireList = read('../entireThesisList.json');
+            return res.status(200).json(entireList);
+        }
+        )
+        .catch(async (error) => {
+            await axios.get('http://localhost:5000/api/writeEntireThesisList');
+            const entireList = read('../entireThesisList.json');
+            return res.status(200).json(entireList);
+        });
+});
+
+router.get('/readUnfoundThesisList', async (req, res) => {
+    checkExistsWithTimeout('../unfoundThesisList.json', 500)
+        .then(() => {
+            const unfoundList = read('../unfoundThesisList.json');
+            return res.status(200).json(unfoundList);
+        }
+        )
+        .catch(async (error) => {
+            await axios.get('http://localhost:5000/api/writeUnfoundThesisList');
+            const unfoundList = read('../unfoundThesisList.json');
+            return res.status(200).json(unfoundList);
+        })
+});
 
 module.exports = router;

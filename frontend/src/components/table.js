@@ -26,7 +26,7 @@ class table extends Component {
             var result = "";
             for (var i = 0; i < string.length; i++) {
                 result += `${string[i]}`;
-                if (i < string.length - 1) result+= ', ';
+                if (i < string.length - 1) result += ', ';
                 else break;
             }
             return result;
@@ -50,7 +50,7 @@ class table extends Component {
             columns.forEach(column => newThesis[column] = thesis[column]);
             const arrayOfTD = [];
             for (var prop in newThesis) {
-                if ((prop === 'supervisorsInMET'|| prop === 'assistantSupervisorsInMET') && (newThesis[prop]))
+                if ((prop === 'supervisorsInMET' || prop === 'assistantSupervisorsInMET') && (newThesis[prop]))
                     arrayOfTD.push(<td>{print(newThesis[prop])}</td>);
                 else
                     arrayOfTD.push(<td>{newThesis[prop]}</td>);

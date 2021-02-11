@@ -19,7 +19,7 @@ class ThesisTable extends Component {
     };
 
     componentDidMount() {
-        axios.get('http://localhost:5000/api/entireThesisList')
+        axios.get('http://localhost:5000/api/readEntireThesisList')
             .then(response => {
                 this.setState({ entireThesisList: response.data });
                 console.log('State: ', this.state);
@@ -29,22 +29,12 @@ class ThesisTable extends Component {
                 console.log('Error: ', error);
             });
 
-        axios.get('http://localhost:5000/api/unfoundThesisList')
+        axios.get('http://localhost:5000/api/readUnfoundThesisList')
             .then(response => {
                 this.setState({ unfoundThesisList: response.data });
                 console.log('State: ', this.state);
                 console.log('Response for getting unfound thesis list: ', response.data);
             })
-            .catch(error => {
-                console.log('Error: ', error);
-            });
-
-        axios.get('http://localhost:5000/api/allCategories')
-            .catch(error => {
-                console.log('Error: ', error);
-            });
-
-        axios.get('http://localhost:5000/api/allSupervisors')
             .catch(error => {
                 console.log('Error: ', error);
             });
@@ -150,7 +140,7 @@ class ThesisTable extends Component {
                     }); break;
 
             case 'ida':
-                axios.get('http://localhost:5000/api/entireThesisList')
+                axios.get('http://localhost:5000/api/readEntireThesisList')
                     .then(response => {
                         this.setState({ entireThesisList: response.data });
                         console.log('State: ', this.state);
@@ -203,7 +193,7 @@ class ThesisTable extends Component {
                         console.log('Error: ', error);
                     }); break;
             case 'ida1':
-                axios.get('http://localhost:5000/api/unfoundThesisList')
+                axios.get('http://localhost:5000/api/readUnfoundThesisList')
                     .then(response => {
                         this.setState({ entireThesisList: response.data });
                         console.log('State: ', this.state);
