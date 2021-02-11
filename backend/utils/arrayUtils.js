@@ -8,8 +8,13 @@ const binarySearch = (arr, x) => {
         // Find the mid index 
         let mid = Math.floor((start + end) / 2);
 
-        // If element is present at mid, retzurn True 
-        if (arr[mid].thesisName.toLowerCase().startsWith(x.toLowerCase())) {
+        let Student = x.toLowerCase();
+        let MET = arr[mid].thesisName.toString().split(/\s[-–]\s/)[0].toLowerCase()
+        .replace(' i & ii', '')
+        .replace(' in vr', '');
+
+        // If element is present at mid, return True 
+        if (MET.startsWith(Student) || Student.startsWith(MET)) {
             return mid;
         }
 

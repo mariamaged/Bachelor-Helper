@@ -12,9 +12,15 @@ var listener = app.listen(process.env.PORT, function () {
 });
 
 (async () => {await main(); 
-    await axios.get('http://localhost:5000/api/entireThesisList'); 
+    await axios.get('http://localhost:5000/api/writeEntireThesisList');
+    console.log('Entire thesis written.'); 
+    await axios.get('http://localhost:5000/api/writeUnfoundThesisList'); 
+    console.log('Unfound thesis written.'); 
     await axios.get('http://localhost:5000/api/allCategories');
+    console.log('All categories written.'); 
     await axios.get('http://localhost:5000/api/allSupervisors');
+    console.log('All supervisors written.'); 
+    console.log('Done!');
     })();
 
 
