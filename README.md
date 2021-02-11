@@ -14,8 +14,8 @@
 2. **Step 2:** Open the backend folder > then open the .env file and insert your username and password beside their respective variables that are already there. This is how the latter part of the file should look like. 
    - `Note:` I tried to echo these two lines, and it didn't really work, so I do it manually.
 ```bash
-USER_NAME=<insert_you_username>
-PASSWORD=<insert_you_password>
+USER_NAME=<insert_your_username>
+PASSWORD=<insert_your_password>
 ```
 3. **Step 3:** Open a new terminal.
 4. **Step 4:** Navigate into the backend directory.
@@ -88,3 +88,5 @@ npm start
 3. Total number of thesis.
 4. Number of thesis not found in MET.
 - (to be added).
+
+![enter image description here](https://lh3.googleusercontent.com/pw/ACtC-3cG9_ububIYw_9IbOO1YDBE3IErzhu4r7mL13o38THqYj9MpvfmVWbifbrTrCCJAJQrue5YHeaF15AAdv_EDuqZrTNRHq3M1wRG_U3ObrGNP9GSvyEtjGxYqTjHBTltgUyU_ZRgsZm8P3tj5GACAMjY=w1006-h418-no?authuser=0)
