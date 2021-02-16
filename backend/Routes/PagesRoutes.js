@@ -30,7 +30,7 @@ router.get('/allCategories', async (req, res) => {
             for (var i = 0; i < studentThesisList.length; i++) {
                 if (studentThesisList[i].category === categoryObject.category) {
                     categoryList.push(studentThesisList[i]);
-                    if(i == studentThesisList.length - 1) {
+                    if(i === studentThesisList.length - 1) {
                         categoryObject.thesisList = categoryList;
                         finalList.push(categoryObject);
                     }
@@ -73,7 +73,7 @@ router.get('/allCategories', async (req, res) => {
             for (var i = 0; i < studentThesisList.length; i++) {
                 if (studentThesisList[i].category === categoryObject.category) {
                     categoryList.push(studentThesisList[i]);
-                    if(i == studentThesisList.length - 1) {
+                    if(i === studentThesisList.length - 1) {
                         categoryObject.thesisList = categoryList;
                         finalList.push(categoryObject);
                     }
